@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
+class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener,
+    View.OnTouchListener{
 
     lateinit var gDetector: GestureDetector
 
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Ges
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         gDetector = GestureDetector(this, this)
+        img.setOnTouchListener(this)
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -25,27 +28,29 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Ges
         else{
             txv.text = "靜宜之美"
         }
-        txv.text = "x=" + event?.x.toString() + "\ny=" + event?.y.toString()*/
-        gDetector.onTouchEvent(event)
+        txv.text = "x=" + event?.x.toString() + "\ny=" + event?.y.toString()
+        gDetector.onTouchEvent(event)*/
         return true
     }
 
     override fun onDown(
         p0: MotionEvent?
     ): Boolean {
-        txv.text = "Press Down"
+        /*txv.text = "Press Down"*/
         return true
     }
 
     override fun onSingleTapUp(
         p0: MotionEvent?
     ): Boolean {
-        txv.text = "Single Tap"
+        /*txv.text = "Single Tap"*/
         return true
     }
 
-    override fun onLongPress(p0: MotionEvent?) {
-        txv.text = "Long Press"
+    override fun onLongPress(
+        p0: MotionEvent?)
+    {
+        /*txv.text = "Long Press"*/
     }
 
     override fun onShowPress(p0: MotionEvent?) {
@@ -85,6 +90,11 @@ class MainActivity : AppCompatActivity(), GestureDetector.OnGestureListener, Ges
     }
 
     override fun onSingleTapConfirmed(p0: MotionEvent?): Boolean {
+        return true
+    }
+
+    override fun onTouch(p0: View?, event: MotionEvent?): Boolean {
+        gDetector.onTouchEvent(event)
         return true
     }
 
